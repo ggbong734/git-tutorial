@@ -1,0 +1,24 @@
+steps to 
+1. create git repo 
+2. open https://github.com/new
+3. fill in repo name
+4. in Ubuntu, change directory to local folder to be hosted in github
+5. git init at command line (you will see a .git file in the folder)
+6. tell local github the upstream URI location: git remote add origin https://github.com/ggbong734/udacity-dend-project1.git
+7. To stage items use: git add <file_name> or git add . to recursively add all files
+8. git status to check what items are staged
+9. make initial commit using: git commit -m "first commit message"
+10. Push commited changes to upstream repo in github: git push origin master 
+
+11. Extra: To change file name: git mv old_file_name new_file_name
+12. To check upstream repo locations: git remote -v
+
+
+Troubleshooting:
+How to sync remote and local branches if both are modified (git push gives error):
+`hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes`
+
+Rebase the local directory using: git pull --rebase origin master
+This will rewind changes made in local to the same baseline as the remote repo, then apply the remote changes and then apply local changes so no changes are lost.

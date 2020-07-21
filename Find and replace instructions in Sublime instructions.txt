@@ -1,0 +1,16 @@
+To find and replace all file paths in multiple Jupyter notebooks
+
+Goal: replaces file_name.csv with data/file_name.csv
+
+1. In Sublime, press "Ctrl+Shift+F". a find replace menu will pop up
+2. To find file names that end with ".csv", enter "(\\?["'])([A-Za-z_0-9]+\.csv)(\\?["'])" in the "Find" field
+3. Select which folder to search in, Click on the "..." icon next to the "Where" field
+4. In the "Replace" field, enter $1data/$2$3 
+5. The $1 refers to the first section of regex (optional backslash and single or double quotation mark)
+6. The $2 refers to the second section of regex (alphanumeric character one or more times ending with .csv)
+7. The $3 refers to the third section of regex (optional backslash and single or double quotation mark)
+8. We place the data/ before the $2
+9. Note in regex the . has a backslash before to escape it as . means 0 or more character in regex
+
+
+This is a very handy tool to use in Sublime!!
