@@ -111,7 +111,7 @@ The `.gitignore` file is used to tell Git about the files Git should not track. 
     -  `**` matches nested directories 
     - `a/**/z` matches a/z, a/b/z, a/b/c/z
 
-## Tagging, Branching, and Merging 
+## Tagging
 
 The `git tag` command adds tags to specific commits.
 - Example, `git tag -a v1.0 a87984` adds a tag that specifies the commit with the a87984 SHA is version 1.
@@ -119,6 +119,8 @@ The `git tag` command adds tags to specific commits.
 - always use annotated tags
 - Use `git log` to show which commits have tags (shown next to SHAs)
 - delete tags with the `-d` flag such as `git tag -d v1.0`
+
+## Branching and Merging
 
 The `git branch` command allows multiple lines of development.
 - used to create, delete, list branches in repository
@@ -140,7 +142,20 @@ The `git merge`command takes changes on different branches and combine them toge
     - Regular merge happens if the branch being merged in has less commits. 
     - Fast-forward merge happens if the branch being merged in is ahead of the current branch in commits.
 - To undo merge, use `git reset --hard HEAD^`
-- When merging, Git will check the branches' history and find a single commit that both branches have in the commit history. Then Git cobines the lines of code that were changed on the separate branches together. Then Git makes a commit to record the merge.
+- When merging, Git will check the branches' history and find a single commit that both branches have in the commit history. Then Git combines the lines of code that were changed on the separate branches together. Then Git makes a commit to record the merge.
 
+### Merge conflict
 
+A **merge conflict** will happen when the same line(s) of code are changed in separate branches. Git will not know which change to keep. Git will show the differences using the merge conflict indicators (see below). The **solution** is to edit the same line(s) on two different branches and then try to merge again.
+
+#### Merge conflict indicators
+- `<<<<<<< HEAD` everything below this line (until the next indicator) shows what's in the current branch
+- `||||||| merged common ancestors` everything below this line (until the next indicator) shows what the original lines were
+- `=======` is the end of the original lines, everything that follows (until the next indicator) is what's in the branch that is being merged in.
+- `>>>>>>> branch_name` is the ending indicator of what's on the branch that's being merged in
+
+#### To resolve a merge conflict:
+- choose which line(s) to keep
+- locate and remove all lines with indicators
+- Once all lines with merge conflict indicators are removed (and the line to keep remains), save file, add to staging index, and commit.
 
