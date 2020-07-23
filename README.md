@@ -54,7 +54,7 @@ git config --global user.email "<your-email-address>"
 
 Use `git init` to create a new, empty repo in the current directory. Git does this by adding a .git directory which contains files to keep track of everything.  
 
-## Cloning a Repo
+### Cloning a Repo
 
 Use `git clone` to create an identical copy of an existing repository. 
 
@@ -62,7 +62,7 @@ Use `git clone` to create an identical copy of an existing repository.
 git clone <path-to-repository-to-clone> <optional-name-of-directory>
 ```
 
-## Checking status of Repo
+## Checking status of Repo/Review changes
 
 The `git status` command displays which files have been changed/added in directory that is different from the repo.
 
@@ -159,3 +159,34 @@ A **merge conflict** will happen when the same line(s) of code are changed in se
 - locate and remove all lines with indicators
 - Once all lines with merge conflict indicators are removed (and the line to keep remains), save file, add to staging index, and commit.
 
+## Undoing changes
+
+The `git commit --amend` command alters the most commit. For e.g. if we forgot to include a file or a typo in the commit message.
+- To add a forgotten link we can edit the file, save the file, stage it, and run the command `git commit --amend`. This will update the most recent commit instead of creating a new one. 
+- We can also add a new commit message which will overwrite the original message. 
+
+`git revert <SHA_of_commit_to_revert>` reverses given commit. For e.g. lines added in a commit are deleted. 
+- This command will undo the changes made by the provided commit.
+- It will also create a new commit to record the change.
+
+`git reset <reference_to_commit>` erases commit.
+- On first glance this might seem similar to revert but reverting **creates** a new commit that undos a previous commit, while resetting **erases** commit.
+> Resetting is dangerous, If a commit is no longer in repository, its content is gone. We can use the `git reflog` command to access content erased in the last 30 days.
+- The command can be used to 
+    - move the HEAD and current branch pointer to the referenced commit
+    - erase commits using the `--hard` flag
+    - move committed changes to the staging index using the `--soft` flag
+    - move/unstage committed changes to the Working directory using `--mixed` flag (default)
+    - usually a backup branch is created before doing hard resets
+
+### Relative Commit references
+There are times when we want to reference a commit before the current commit, or two before the current commit. These special **Ancestry References** can be used:
+- `^` indicates the parent commit
+- `~` indicates the first parent commit
+
+For example:
+- the parent commit can be referred to as `HEAD^`, `HEAD~`, `HEAD~1`.
+- the grandparent commit `HEAD^^`, `HEAD~2`.
+- the great-grandparent commit `HEAD^^^`, `HEAD~3`.
+
+For a merge commit, the `^` refers to the branch we were in when running the `git merge`, while the `^2` indicates the branch that was merged in. 
